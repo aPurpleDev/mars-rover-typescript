@@ -11,12 +11,14 @@ export class MarsRover {
     public direction: Direction
     public position: Position
     public worldMap: WorldMap
+    public worldMapArt: string
 
     constructor(direction: Direction = 'N'
-     , position: Position = new Position(), worldMap: WorldMap = new WorldMap()){
+     , position: Position = new Position(), worldMap: WorldMap = new WorldMap(), worldMapArt: string = ''){
         this.direction = direction
         this.position = position
         this.worldMap = worldMap
+        this.worldMapArt = worldMapArt
     }
 
     advance(): void {
@@ -42,7 +44,6 @@ export class MarsRover {
 
     executeOrders(orders: string[]): void {
         orders.map( order => {
-            console.log(order)
             switch(order){
                 case 'advance': this.advance()
                 break
@@ -56,8 +57,6 @@ export class MarsRover {
                 default: throw new Error('Mars rover cannot execute an unknown order')
             }
         })
-
-        this.drawWorld()
     }
 
     turnLeft(): void {
@@ -67,16 +66,13 @@ export class MarsRover {
         else {
             this.direction = 'W'
         }
-
-        this.drawWorld()
     }
 
     turnRight(): void {
         this.direction = CARDINALS[CARDINALS.indexOf(this.direction) + 1 % CARDINALS.length]
-        this.drawWorld()
     }
 
-    drawWorld(): string {
+    drawWorld(): void {
         let mapArt: string = '';
         let roverDirectionIcon: string = '';
 
@@ -113,8 +109,8 @@ export class MarsRover {
             }
         }
 
-        console.log(mapArt) // drawing using console log seems the simplest way for the Kata's purpose
-        return mapArt;
+        console.log(mapArt) // drawing using console log Kata's purpose
+        this.worldMapArt = mapArt;
     }
 }
 
