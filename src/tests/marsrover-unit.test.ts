@@ -1,22 +1,5 @@
-import { MarsRover, Position, WorldMap } from '../marsrover'
-
-describe('Mars rover acceptance tests', function() {
-
-    test('Exploration scenario', () => {
-    const marsRover = new MarsRover('N', new Position(), new WorldMap(5, 5, [{x:0, y:1, isObstacle: true}]))
-    expect(marsRover).toHaveProperty('position', {x: 0, y: 4})
-    marsRover.executeOrders(['advance', 'advance', 'advance', 'turnRight', 'turnRight'])
-    marsRover.drawWorld()
-    expect(marsRover).toHaveProperty('position', {x: 0, y: 2})
-    expect(marsRover).toHaveProperty('direction', 'S')
-    expect(marsRover.worldMapArt).toEqual(
-`🟩🟩🟩🟩🟩
-🪨🟩🟩🟩🟩
-⬇️ 🟩🟩🟩🟩
-🟩🟩🟩🟩🟩
-🟩🟩🟩🟩🟩`)
-    })
-})
+import { MarsRover } from '../classes/marsrover'
+import { WorldMap } from '../classes/worldmap'
 
 describe('Mars rover exploration unit tests', function() {
 
